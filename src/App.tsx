@@ -1,14 +1,10 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home.tsx';
 // import About from './pages/About';
 
 const App = () => {
     return (
         <Router>
-            <nav style={{ padding: '1rem', borderBottom: '1px solid #ccc' }}>
-                <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
-                {/*<Link to="/about">About</Link>*/}
-            </nav>
             <Routes>
                 <Route path="/" element={<Home />} />
                 {/*<Route path="/about" element={<About />} />*/}

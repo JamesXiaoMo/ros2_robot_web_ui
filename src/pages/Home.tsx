@@ -1,5 +1,11 @@
+import {Model} from "../components/3dModel.tsx";
+
 const Home = () => {
-    return <h1>Home Page</h1>;
-};
+    return (
+        <>
+            <Model />
+        </>
+    )
+}
 
 export default Home;
