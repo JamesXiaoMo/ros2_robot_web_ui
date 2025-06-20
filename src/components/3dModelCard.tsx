@@ -1,16 +1,17 @@
-import {Paper} from "@mui/material";
-import {Model} from "./3dModel.tsx";
+import {Box} from "@mui/material";
+import Spline from '@splinetool/react-spline';
 
 export const ModelCard = () => {
     return (
-        <Paper sx={{
+        <Box sx={{
             width: '100%',
             height: 390,
             display: 'flex',
-            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
             backgroundColor: 'black',
         }}>
-            <Model />
-        </Paper>
+            <Spline scene="https://prod.spline.design/zhvQIFgCxk5EtUqk/scene.splinecode" />
+        </Box>
     )
 }
