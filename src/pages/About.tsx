@@ -34,7 +34,7 @@ export default function About() {
                         fontSize: 10,
                     }}
                 >
-                    Designed by WUYUNGANG in Fukuyama University, Oki Lab, 2025.
+                    Designed by WU YUNGANG in Fukuyama University, Oki Lab, 2025.
                 </Typography>
                 <Typography
                     sx={{

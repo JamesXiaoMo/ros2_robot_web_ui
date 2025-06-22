@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home.tsx';
 import Power from './pages/Power.tsx';
+import Brightness from './pages/Brightness.tsx';
 import About from "./pages/About.tsx";
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/power" element={<Power />} />
+                <Route path="/brightness" element={<Brightness />} />
                 <Route path="/about" element={<About />} />
             </Routes>
         </Router>

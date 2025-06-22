@@ -10,4 +10,11 @@ const powerTopic = new ROSLIB.Topic({
     messageType: 'power_measurement/Ina228Sensor',
 });
 
-export { ros, powerTopic };
+const brightnessTopic = new ROSLIB.Topic({
+    ros: ros,
+    name: '/brightness_info',
+    messageType: 'std_msgs/Float32'
+
+})
+
+export { ros, powerTopic, brightnessTopic};

@@ -159,6 +159,7 @@ const Home = () => {
                             sx={{
                                 color: 'white',
                             }}
+                            onClick={() => navigate('/brightness')}
                         >
                             <ListItemIcon>
                                 <TipsAndUpdatesIcon sx={{color: 'white'}}/>

@@ -1,54 +1,40 @@
-# React + TypeScript + Vite
+# ROS2 Robot Web UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern Web UI built with **React** for controlling and visualizing data from a **ROS2-based luminance measurement robot**.  
+This interface communicates with the robot via **WebSocket** using **rosbridge_suite**, enabling real-time data exchange between the browser and ROS2 topics/services.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🧠 Real-time communication with ROS2 via `rosbridge_suite`
+- 💡 Visual display of brightness sensor readings
+- 🔌 WebSocket-based connection to ROS2
+- 🕹️ Remote control interface for robot movement (if applicable)
+- 📊 Extendable for custom sensors and controls
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React + TypeScript
+- MUI (Material UI)
+- ROS2 (Foxy/Humble/etc.)
+- rosbridge_suite (for WebSocket-ROS2 bridge)
+- roslibjs
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+
+## Setup Instructions
+
+### Prerequisites
+
+- ROS2 installed on the robot system
+- `rosbridge_suite` running and listening on WebSocket port (default: `9090`)
+- Node.js ≥ 18
+
+### Install Dependencies
+
+```bash
+git clone https://github.com/JamesXiaoMo/ros2_robot_web_ui.git
+cd ros2_robot_web_ui
+npm install
+npm run dev
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Author
+Designed by WU YUNGANG in Fukuyama University, Oki Lab, 2025
