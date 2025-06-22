@@ -4,14 +4,36 @@ import AppBarComponent from "../components/appBar.tsx";
 import BatteryGauge from "react-battery-gauge";
 import {Divider, Typography, List, ListItem, ListItemButton, ListItemText, ListItemIcon} from "@mui/material";
 import SportsEsports from '@mui/icons-material/SportsEsports';
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import InfoIcon from '@mui/icons-material/Info';
 import { useNavigate } from 'react-router-dom'
+import { powerTopic } from "../ros2/rosBridge.ts";
+import {useState, useEffect} from "react";
+
+interface powerMessage {
+    current: number;
+    power: number;
+    voltage: number;
+}
 
 const Home = () => {
     document.body.style.margin = '0';
     document.body.style.padding = '0';
     document.body.style.backgroundColor = '#0f0f0f';
     const navigate = useNavigate();
+    const [voltage, setVoltage] = useState(0.0)
+    const [current, setCurrent] = useState(0.0)
+    useEffect(() => {
+        const callback = (message: powerMessage) => {
+            setVoltage(parseFloat(message.voltage.toFixed(1)));
+            setCurrent(parseFloat(message.current.toFixed(1)));
+        };
+        powerTopic.subscribe(callback);
+
+        return () => {
+            powerTopic.unsubscribe();
+        };
+    }, []);
     return (
         <Box sx={{
             width: '100%',
@@ -41,8 +63,8 @@ const Home = () => {
                         fontWeight:'bold',
                         paddingRight: 1
                     }}
-                    onClick={() => navigate('/battery')}
-                >12.0V</Typography>
+                    onClick={() => navigate('/power')}
+                >{voltage.toFixed(1)}V</Typography>
                 <Divider
                     orientation={"vertical"}
                     sx={{
@@ -50,11 +72,11 @@ const Home = () => {
                     }}
                 />
                 <BatteryGauge
-                    value={90}
+                    value={((voltage-11)/2)<0 ? 0 : (voltage-11)/2}
                     max={100}
                     width={100}
                     animated={true}
-                    charging={false}
+                    charging={true}
                     customization={
                         {
                           batteryBody: {
@@ -94,7 +116,7 @@ const Home = () => {
                           },
                         }
                     }
-                    onClick={() => navigate('/battery')}
+                    onClick={() => navigate('/power')}
                 />
                 <Divider
                     orientation={"vertical"}
@@ -102,7 +124,7 @@ const Home = () => {
                         borderColor: '#737373FF',
                     }}
                 />
-                <Typography variant={"h5"} sx={{color:'white', fontWeight:'bold', paddingLeft: 1}}>0.0A</Typography>
+                <Typography variant={"h5"} sx={{color:'white', fontWeight:'bold', paddingLeft: 1}} onClick={() => navigate('/power')}>{current.toFixed(1)}A</Typography>
             </Box>
             <Box
                 sx={{
@@ -121,7 +143,34 @@ const Home = () => {
                             <ListItemIcon>
                                 <SportsEsports sx={{color: 'white'}}/>
                             </ListItemIcon>
-                            <ListItemText primary="Romote control" primaryTypographyProps={{fontWeight: 'bold'}}/>
+                            <ListItemText
+                                primary="Romote control"
+                                slotProps={{
+                                    primary: {
+                                        sx: { fontWeight: 'bold' },
+                                    },
+                                }}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                    <Divider sx={{backgroundColor: '#737373FF'}}/>
+                    <ListItem disablePadding>
+                        <ListItemButton
+                            sx={{
+                                color: 'white',
+                            }}
+                        >
+                            <ListItemIcon>
+                                <TipsAndUpdatesIcon sx={{color: 'white'}}/>
+                            </ListItemIcon>
+                            <ListItemText
+                                primary="Brightness measurement"
+                                slotProps={{
+                                    primary: {
+                                        sx: { fontWeight: 'bold' },
+                                    },
+                                }}
+                            />
                         </ListItemButton>
                     </ListItem>
                     <Divider sx={{backgroundColor: '#737373FF'}}/>
@@ -135,7 +184,14 @@ const Home = () => {
                             <ListItemIcon>
                                 <InfoIcon sx={{color: 'white'}}/>
                             </ListItemIcon>
-                            <ListItemText primary="About" primaryTypographyProps={{fontWeight: 'bold'}}/>
+                            <ListItemText
+                                primary="About"
+                                slotProps={{
+                                    primary: {
+                                        sx: { fontWeight: 'bold' },
+                                    },
+                                }}
+                            />
                         </ListItemButton>
                     </ListItem>
                 </List>

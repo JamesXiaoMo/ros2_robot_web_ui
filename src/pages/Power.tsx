@@ -1,7 +1,7 @@
 import AppBarComponent from "../components/appBar.tsx";
 import Box from "@mui/material/Box";
 
-export default function Battery() {
+export default function Power() {
     return(
         <Box sx={{
             width: '100%',
@@ -10,7 +10,7 @@ export default function Battery() {
             alignItems: 'center',
             gap: 2,
         }}>
-            <AppBarComponent title={"Battery"}/>
+            <AppBarComponent title={"Power"}/>
         </Box>
     )
 }
