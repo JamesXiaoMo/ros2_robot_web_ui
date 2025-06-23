@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Joystick, {Direction} from "rc-joystick";
 import {useEffect, useRef, useState} from "react";
 import {publishTwist} from "../ros2/rosBridge.ts";
+import Button from '@mui/material/Button';
 
 export default function RemoteControl() {
     const joystickContainerRef = useRef<HTMLDivElement>(null);
@@ -28,14 +29,14 @@ export default function RemoteControl() {
         direction: Direction;
         angle: number | undefined;
         distance: number;
-      }) => {
+    }) => {
         if (val.angle !== undefined) {
-          const radians = (val.angle * Math.PI) / 180;
-          setX(Math.cos(radians) * val.distance);
-          setY(Math.sin(radians) * val.distance);
+            const radians = (val.angle * Math.PI) / 180;
+            setX(Math.cos(radians) * val.distance);
+            setY(Math.sin(radians) * val.distance);
         } else {
-          setX(0);
-          setY(0);
+            setX(0);
+            setY(0);
         }
         publishTwist(x/130, y/130, 0)
         console.log("Angle:", val.angle);
@@ -43,7 +44,7 @@ export default function RemoteControl() {
         console.log("Distance:", val.distance);
         console.log("X:", x/130);
         console.log("Y:", y/130);
-      };
+    };
     return (
         <Box
             sx={{
@@ -67,11 +68,25 @@ export default function RemoteControl() {
                 ref={joystickContainerRef}
             >
                 <Joystick
-                    baseRadius={130}
+                    baseRadius={125}
                     controllerRadius={50}
                     autoReset={true}
                     onChange={handleChange}
                 />
+                <Box
+                    sx={{
+                        width:'100%',
+                        height:10,
+                        display:'flex',
+                        flexDirection:'row',
+                        justifyContent:'center',
+                        alignItems:'center',
+                        gap:2,
+                    }}
+
+                >
+                    <Button></Button>
+                </Box>
             </Box>
         </Box>
     );
