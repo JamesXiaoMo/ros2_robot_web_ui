@@ -14,7 +14,28 @@ const brightnessTopic = new ROSLIB.Topic({
     ros: ros,
     name: '/brightness_info',
     messageType: 'std_msgs/Float32'
-
 })
 
-export { ros, powerTopic, brightnessTopic};
+const cmdVelTopic = new ROSLIB.Topic({
+  ros: ros,
+  name: "/cmd_vel",
+  messageType: "geometry_msgs/Twist",
+});
+
+const publishTwist = (linearX: number, linearY: number,  angularZ: number) => {
+  const twist = new ROSLIB.Message({
+    linear: {
+      x: linearX,
+      y: linearY,
+      z: 0,
+    },
+    angular: {
+      x: 0,
+      y: 0,
+      z: angularZ,
+    },
+  });
+  cmdVelTopic.publish(twist);
+};
+
+export { ros, powerTopic, brightnessTopic, publishTwist};

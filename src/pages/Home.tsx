@@ -72,11 +72,11 @@ const Home = () => {
                     }}
                 />
                 <BatteryGauge
-                    value={((voltage-11)/2)<0 ? 0 : (voltage-11)/2}
+                    value={((voltage-11)/2)<0 ? 0 : (voltage-11)/2*100}
                     max={100}
                     width={100}
                     animated={true}
-                    charging={true}
+                    charging={false}
                     customization={
                         {
                           batteryBody: {
@@ -139,6 +139,7 @@ const Home = () => {
                             sx={{
                                 color: 'white',
                             }}
+                            onClick={() => navigate('/remotecontrol')}
                         >
                             <ListItemIcon>
                                 <SportsEsports sx={{color: 'white'}}/>

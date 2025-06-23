@@ -16,12 +16,12 @@ export default function Brightness() {
             setBrightness(message.data);
             setLabels((prev) => {
                 const updated = [...prev, timeStr];
-                return updated.length > 50 ? updated.slice(-50) : updated;
+                return updated.length > 60 ? updated.slice(-60) : updated;
             });
 
             setLuxValues((prev) => {
                 const updated = [...prev, message.data];
-                return updated.length > 50 ? updated.slice(-50) : updated;
+                return updated.length > 60 ? updated.slice(-60) : updated;
             });
         };
         brightnessTopic.subscribe(callback);
