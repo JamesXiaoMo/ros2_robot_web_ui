@@ -4,6 +4,8 @@ import Joystick, {Direction} from "rc-joystick";
 import {useEffect, useRef, useState} from "react";
 import {publishTwist} from "../ros2/rosBridge.ts";
 import Button from '@mui/material/Button';
+import RotateLeftIcon from '@mui/icons-material/RotateLeft';
+import RotateRightIcon from '@mui/icons-material/RotateRight';
 
 export default function RemoteControl() {
     const joystickContainerRef = useRef<HTMLDivElement>(null);
@@ -50,6 +52,10 @@ export default function RemoteControl() {
             sx={{
                 width: "100%",
                 gap: 2,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
             }}
         >
             <AppBarComponent title={"RemoteControl"} />
@@ -60,10 +66,12 @@ export default function RemoteControl() {
                     backgroundColor: "#2b2b2b",
                     borderRadius: 5,
                     paddingBottom: 3,
+                    paddingTop: 3,
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
                     flexDirection: "column",
+                    gap:5
                 }}
                 ref={joystickContainerRef}
             >
@@ -81,11 +89,26 @@ export default function RemoteControl() {
                         flexDirection:'row',
                         justifyContent:'center',
                         alignItems:'center',
-                        gap:2,
+                        gap:8,
                     }}
 
                 >
-                    <Button></Button>
+                    <Button
+                        startIcon={<RotateLeftIcon />}
+                        sx={{
+                            color: "white",  // 控制按钮文字和图标颜色
+                        }}
+                    >
+                        Turn left
+                    </Button>
+                    <Button
+                        startIcon={<RotateRightIcon />}
+                        sx={{
+                            color: "white",  // 控制按钮文字和图标颜色
+                        }}
+                    >
+                        Turn right
+                    </Button>
                 </Box>
             </Box>
         </Box>
