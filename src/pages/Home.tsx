@@ -40,6 +40,7 @@ const Home = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            justifyContent: 'center',
             gap: 2,
         }}>
             <AppBarComponent title={"ROS2 Robot Web UI"}/>

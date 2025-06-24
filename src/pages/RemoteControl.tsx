@@ -11,7 +11,7 @@ export default function RemoteControl() {
     const joystickContainerRef = useRef<HTMLDivElement>(null);
     const [x, setX] = useState(0.0)
     const [y, setY] = useState(0.0)
-    // const [rotation, setRotation] = useState(0.0)
+    const [rotation, setRotation] = useState(0.0)
 
     useEffect(() => {
         const container = joystickContainerRef.current;
@@ -27,26 +27,33 @@ export default function RemoteControl() {
         }
     }, []);
 
-    const handleChange = (val: {
+    const handleJoystickChange = (val: {
         direction: Direction;
         angle: number | undefined;
         distance: number;
     }) => {
         if (val.angle !== undefined) {
             const radians = (val.angle * Math.PI) / 180;
-            setX(Math.cos(radians) * val.distance);
-            setY(Math.sin(radians) * val.distance);
+            const newX = Math.cos(radians) * val.distance;
+            const newY = Math.sin(radians) * val.distance;
+            setX(newX);
+            setY(newY);
+            publishTwist(x/130*0.2, y/130*0.2, rotation)
         } else {
             setX(0);
             setY(0);
+            publishTwist(0, 0, rotation);
         }
-        publishTwist(x/130, y/130, 0)
         console.log("Angle:", val.angle);
         console.log("Direction:", val.direction);
         console.log("Distance:", val.distance);
         console.log("X:", x/130);
         console.log("Y:", y/130);
     };
+    const handleRotationChange = (Rotation : boolean) => {
+        setRotation(Rotation ?  rotation-0.5 : rotation+0.5)
+        publishTwist(x/130*0.2, y/130*0.2, rotation)
+    }
     return (
         <Box
             sx={{
@@ -79,7 +86,7 @@ export default function RemoteControl() {
                     baseRadius={125}
                     controllerRadius={50}
                     autoReset={true}
-                    onChange={handleChange}
+                    onChange={handleJoystickChange}
                 />
                 <Box
                     sx={{
@@ -98,6 +105,7 @@ export default function RemoteControl() {
                         sx={{
                             color: "white",  // 控制按钮文字和图标颜色
                         }}
+                        onClick={() => handleRotationChange(true)}
                     >
                         Turn left
                     </Button>
@@ -106,6 +114,7 @@ export default function RemoteControl() {
                         sx={{
                             color: "white",  // 控制按钮文字和图标颜色
                         }}
+                        onClick={() => handleRotationChange(false)}
                     >
                         Turn right
                     </Button>
