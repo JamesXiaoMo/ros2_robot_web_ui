@@ -1,7 +1,7 @@
-import ROSLIB from 'roslib';
+import * as ROSLIB from 'roslib'
 
 const ros = new ROSLIB.Ros({
-    url: 'ws://100.82.239.65:9090',
+    url: 'ws://localhost:9090',
 });
 
 const powerTopic = new ROSLIB.Topic({

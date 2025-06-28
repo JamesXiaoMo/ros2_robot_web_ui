@@ -11,7 +11,7 @@ export default function AppBarComponent({title}: AppBarProps) {
         <AppBar position="static" >
             <Toolbar sx={{ backgroundColor: '#0f0f0f' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Avatar alt="icon" src="/src/assets/robot_white.png" sx={{width:24, height:24, paddingBottom:0.6}}/>
+                <Avatar alt="icon" src="/robot_white.png" sx={{width:24, height:24, paddingBottom:0.6}}/>
                 <Typography variant="h5" sx={{ color: 'white' }}>
                     {title}
                 </Typography>
